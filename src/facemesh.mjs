@@ -1,4 +1,5 @@
 import * as faceLandmarksDetection from '@tensorflow-models/face-landmarks-detection';
+import params from './params.mjs';
 
 // Eye landmark indices for MediaPipe FaceMesh (468 landmarks)
 // Reference: https://github.com/tensorflow/tfjs-models/blob/master/face-landmarks-detection/mesh_map.jpg
@@ -32,10 +33,9 @@ TFFaceMesh.prototype.init = async function() {
     return this.detector;
   }
 
-  // Use MediaPipe runtime with local solution files for offline support
   const detectorConfig = {
     runtime: 'mediapipe',
-    solutionPath: './mediapipe/face_mesh',
+    solutionPath: params.faceMeshSolutionPath,
   };
 
   this.detector = await faceLandmarksDetection.createDetector(this.model, detectorConfig);
